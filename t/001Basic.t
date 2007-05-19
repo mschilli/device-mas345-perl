@@ -6,17 +6,23 @@
 use warnings;
 use strict;
 
-use Test::More qw(no_plan);
+use Test::More;
 use Device::MAS345;
 use Log::Log4perl qw(:easy);
+
+plan tests => 4;
+
+ok(1);
+
 #Log::Log4perl->easy_init($DEBUG);
 
 my $mas = Device::MAS345->new( port => "/dev/ttyS0" );
 
-my($mode, $val, $unit) = $mas->read();
+my($val, $unit, $mode) = $mas->read();
 
-if(!$mode) {
-   die "Cannot read (", $mas->error(), ")";
-}
-
-print "mode=$mode val=$val unit=$unit\n";
+SKIP: {
+  skip "No multimeter tests run by default", 3;
+  is($mode, "TE", "Temperature Mode");
+  like($val, qr/00\d\d/, "Temperature Value");
+  is($unit, "C", "Celsius");
+};
