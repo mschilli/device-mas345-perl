@@ -4,9 +4,4 @@ use strict;
 
     # Available at http://perlmeister.com/scripts
 use ModDevUtils;
-
-{
-  no strict;
-  *ModDevUtils::main_pm_file = sub { "lib/Gaim/Log/Parser.pm" };
-}
 ModDevUtils::release() or exit 0;
