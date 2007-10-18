@@ -16,12 +16,11 @@ ok(1);
 
 #Log::Log4perl->easy_init($DEBUG);
 
-my $mas = Device::MAS345->new( port => "/dev/ttyS0" );
-
-my($val, $unit, $mode) = $mas->read();
 
 SKIP: {
   skip "No multimeter tests run by default", 3;
+  my $mas = Device::MAS345->new( port => "/dev/ttyS0" );
+  my($val, $unit, $mode) = $mas->read();
   is($mode, "TE", "Temperature Mode");
   like($val, qr/00\d\d/, "Temperature Value");
   is($unit, "C", "Celsius");
