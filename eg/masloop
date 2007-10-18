@@ -6,7 +6,10 @@ use Device::MAS345;
 use Log::Log4perl qw(:easy);
 Log::Log4perl->easy_init($DEBUG);
 
-my $mas = Device::MAS345->new( port => "/dev/ttyS0" );
+my $dev = "/dev/ttyS$ARGV[0]";
+DEBUG "dev=$dev";
+
+my $mas = Device::MAS345->new( port => $dev );
 
 while(1) {
     my($val, $unit, $mode) = $mas->read();
