@@ -6,7 +6,7 @@ use warnings;
 use Device::SerialPort;
 use Log::Log4perl qw(:easy);
 
-our $VERSION = "0.02";
+our $VERSION = "0.03";
 
 ###########################################
 sub new {
@@ -50,6 +50,8 @@ sub read {
 
     if($data =~ /(\w+)\s+($valrx)\s+(\w+)/) {
         return ($2, $3, $1);
+    } elsif($data =~ /(\w+)\s+($valrx)(kOhm|MOhm)/) {   # for bunched lines
+        return ($2, $3, $1);                            
     } elsif($data =~ /($valrx)/) {
         return ($1, "", "");
     }

@@ -6,3 +6,4 @@ MANIFEST.SKIP
 MAS345.pm
 README
 t/001Basic.t
+t/002Parser.t
